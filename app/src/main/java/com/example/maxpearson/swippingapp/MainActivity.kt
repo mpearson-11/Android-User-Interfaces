@@ -15,6 +15,7 @@ fun fillPosts() : ArrayList<Post> {
 
     for (i in 1..50) {
         val imageNumber = ((Math.random() * 150) * i + 25)
+        val index = i + 10
         posts.add(Post("" +
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." +
                 " Proin sagittis nisl rhoncus mattis rhoncus." +
@@ -44,7 +45,7 @@ fun fillPosts() : ArrayList<Post> {
                 " Eget velit aliquet sagittis id consectetur purus ut." +
                 " Eu non diam phasellus vestibulum lorem sed." +
                 " A pellentesque sit amet porttitor eget dolor." +
-                "\n", "Post: ${i}", "image-$imageNumber"))
+                "\n", "Post: ${i}", "http://i.imgur.com/DvpvklR.png"))
     }
     return posts
 }

@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory
 import android.os.Environment
 import android.widget.ImageView
 import com.squareup.picasso.Picasso
+import com.squareup.picasso.MemoryPolicy
 
 class PostActivityIntent(val title : String, val content: String, val position: Int) {
     fun createIntent(intent: Intent) : Intent {
@@ -57,13 +58,17 @@ class SwipeAdapter(val posts : ArrayList<Post>, val context : Context) : Recycle
 
         // Set Clicklistener...
         holder.contentText.setOnClickListener { startActivity(holder.itemView, index) }
+
+        Picasso.get()
+                .load(post.image)
+                .resize(100, 100)
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
+                .into(holder.imageView)
     }
 
     class SwipeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val contentText : TextView = view.postItemContent
         val titleText : TextView = view.postItemTitle
-        val image : ImageView = view.postItemImageView
-
-        Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(image)
+        val imageView : ImageView = view.imageView
     }
 }

@@ -8,19 +8,21 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView android:layout_width="390dp" android:layout_height="400dp" android:layout_centerInParent="true" android:layout_margin="10dp">
-        <!-- Image Post Layout View -->
-        <LinearLayout
+        <!-- Image -->
+        <ImageView
+            android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <!-- Image -->
-            <ImageView android:id="@+id/postItemImageView" android:layout_width="match_parent" android:layout_height="345dp"  android:src="@drawable/ic_launcher_foreground"/>
-
-            <!-- Title -->
-            <TextView android:id="@+id/postItemTitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingLeft="12dp" android:textStyle="bold" android:textSize="25dp"/>
-        </LinearLayout>
+            android:src="@drawable/ic_launcher_foreground" />
     </android.support.v7.widget.CardView>
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/postItemTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="12dp"
+        android:textSize="25dp"/>
 
     <!-- Card Post Content View -->
     <android.support.v7.widget.CardView
