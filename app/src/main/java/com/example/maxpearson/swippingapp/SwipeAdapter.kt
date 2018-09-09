@@ -61,7 +61,6 @@ class SwipeAdapter(val posts : ArrayList<Post>, val context : Context) : Recycle
 
         Picasso.get()
                 .load(post.image)
-                .resize(100, 100)
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .into(holder.imageView)
     }
