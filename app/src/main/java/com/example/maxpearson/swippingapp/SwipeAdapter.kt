@@ -1,21 +1,43 @@
 package com.example.maxpearson.swippingapp
 
-import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.widget.TextView
 import kotlinx.android.synthetic.main.post_item.view.*
 import com.example.maxpearson.swippingapp.models.*
-import android.util.Log
 import android.view.*
-import android.widget.Toast
 import android.content.Context
 import android.content.Intent
+import android.content.res.AssetManager
+import android.graphics.BitmapFactory
+import android.os.Environment
+import android.widget.ImageView
+import com.squareup.picasso.Picasso
+
+class PostActivityIntent(val title : String, val content: String, val position: Int) {
+    fun createIntent(intent: Intent) : Intent {
+        intent.putExtra("title", title)
+        intent.putExtra("content", content)
+        intent.putExtra("position", position)
+        return intent
+    }
+}
 
 class SwipeAdapter(val posts : ArrayList<Post>, val context : Context) : RecyclerView.Adapter<SwipeAdapter.SwipeViewHolder>(), View.OnClickListener {
-    override fun onClick(p0: View) {
+    override fun onClick(parent: View) {
+    }
+
+    fun startActivity(parent: View, position: Int) {
+        // Create Intent for PostActivity to send data..
+        val title = parent.postItemTitle.text.toString()
+        val content = parent.postItemContent.text.toString()
+
+        // Intent data for PostActivity (loading content and title)
         val intent = Intent(context, PostActivity::class.java)
-        intent.putExtra("title", p0.postItemText.text.toString())
-        context.startActivity(intent)
+        val mainActivityIntent = PostActivityIntent(title, content, position)
+        val mainIntent = mainActivityIntent.createIntent(intent)
+
+        // Start PostActivity
+        context.startActivity(mainIntent)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SwipeViewHolder {
@@ -23,18 +45,25 @@ class SwipeAdapter(val posts : ArrayList<Post>, val context : Context) : Recycle
         return SwipeViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        return posts.size
+    override fun getItemCount(): Int = posts.size
+
+    override fun onBindViewHolder(holder: SwipeViewHolder, index: Int) {
+        // Retrieve post by index....
+        val post = posts.get(index)
+
+        // ViewHolder content...
+        holder.titleText.text = post.title
+        holder.contentText.text = post.content
+
+        // Set Clicklistener...
+        holder.contentText.setOnClickListener { startActivity(holder.itemView, index) }
     }
 
-    override fun onBindViewHolder(holder: SwipeViewHolder, position: Int) {
-        val post = posts[position]
-        holder.postText.text = post.text
-        holder.postCard.setOnClickListener { onClick(it) }
-    }
+    class SwipeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val contentText : TextView = view.postItemContent
+        val titleText : TextView = view.postItemTitle
+        val image : ImageView = view.postItemImageView
 
-    class SwipeViewHolder(itemview: View) : RecyclerView.ViewHolder(itemview) {
-        val postText : TextView = itemview.postItemText
-        val postCard : CardView = itemview.postItemCardView
+        Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(image)
     }
 }

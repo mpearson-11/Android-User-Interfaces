@@ -1,50 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_centerInParent="true">
+    android:layout_centerInParent="true"
+    android:orientation="vertical">
 
-
-    <android.support.v7.widget.CardView
-        android:layout_width="363dp"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:id="@+id/postItemCardView">
-
-        <RelativeLayout
+    <android.support.v7.widget.CardView android:layout_width="390dp" android:layout_height="400dp" android:layout_centerInParent="true" android:layout_margin="10dp">
+        <!-- Image Post Layout View -->
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="480dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/postItemImageView"
-                android:layout_width="match_parent"
-                android:layout_height="345dp"
-                app:srcCompat="@mipmap/ic_launcher_round" />
+            <!-- Image -->
+            <ImageView android:id="@+id/postItemImageView" android:layout_width="match_parent" android:layout_height="345dp"  android:src="@drawable/ic_launcher_foreground"/>
 
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_marginTop="80dp"
-                android:layout_height="150dp"
-                android:layout_below="@+id/postItemImageView">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/postItemText"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:paddingLeft="12dp"
-                        android:textSize="18dp"/>
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
-        </RelativeLayout>
-
+            <!-- Title -->
+            <TextView android:id="@+id/postItemTitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingLeft="12dp" android:textStyle="bold" android:textSize="25dp"/>
+        </LinearLayout>
     </android.support.v7.widget.CardView>
-</RelativeLayout>
+
+    <!-- Card Post Content View -->
+    <android.support.v7.widget.CardView
+        android:layout_width="390dp"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp"
+        android:layout_marginTop="2dp">
+
+        <!-- ScrollView for Text Content -->
+        <ScrollView android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/scrollViewPostItem">
+
+            <!-- Card Post Layout View -->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical">
+
+                <!-- Post Content Text -->
+                <TextView
+                    android:id="@+id/postItemContent"
+                    android:text="Hello"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="12dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="12dp" />
+            </LinearLayout>
+        </ScrollView>
+    </android.support.v7.widget.CardView>
+</LinearLayout>
